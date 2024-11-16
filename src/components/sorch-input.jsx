@@ -18,6 +18,7 @@ export default function SorchInput() {
   const [input, setInput] = useState("");
   const debounceValue = useDebounce(input);
   const { data, isLoading } = useSearch(debounceValue);
+  console.log(data);
 
   return (
     <Stack sx={{ width: "100%" }} position="static">
@@ -25,7 +26,7 @@ export default function SorchInput() {
         <Box sx={{ position: "relative" }}>
           <TextField
             InputProps={{
-              endAdornment: (
+              endAdornment: ( 
                 <InputAdornment position="end">
                   <SorchIcons />
                 </InputAdornment>
@@ -50,7 +51,7 @@ export default function SorchInput() {
                 boxShadow: 3,
                 maxHeight: 300,
                 overflowY: "auto",
-                zIndex: 1,
+                zIndex: 10000000,
               }}
             >
               {isLoading ? (

@@ -14,8 +14,8 @@ createRoot(document.getElementById("root")).render(
     <QueryClientProvider client={client}>
       <Provider store={store}>
         <App />
-        <CssBaseline />
         <ToastContainer />
+        <CssBaseline />
       </Provider>
     </QueryClientProvider>
   </BrowserRouter>

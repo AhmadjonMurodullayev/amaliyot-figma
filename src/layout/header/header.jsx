@@ -8,7 +8,7 @@ import {
   IconButton,
   Stack,
   Typography,
-  Button, // Added import for Button
+  Button,
 } from "@mui/material";
 import { BurgerIcons } from "../../assets/icons/burger-icons";
 import { LikeIcons } from "../../assets/icons/like-icons";
@@ -16,17 +16,22 @@ import { UserIcons } from "../../assets/icons/user-icons";
 import SorchInput from "../../components/sorch-input";
 import { KorizkaIcons } from "../../assets/icons/korizka-icons";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 export const Header = () => {
-  const [show, setShow] = React.useState(false);
   const { count } = useSelector((state) => state.product);
+ 
 
   return (
     <>
       <Navbar />
       <Stack sx={{ height: "70px" }}>
         <Container maxWidth="xl">
-          <Stack direction="row" spacing={4} sx={{ justifyContent: "space-between", alignItems: "center" }}>
+          <Stack
+            direction="row"
+            spacing={4}
+            sx={{ justifyContent: "space-between", alignItems: "center" }}
+          >
             <Stack direction="row" spacing={4}>
               <img src={logo} alt="logo" />
               <Stack
@@ -43,9 +48,8 @@ export const Header = () => {
                 </IconButton>
                 Каталог
               </Stack>
-              <Stack direction="row" sx={{width: "800px"}}>
-
-              <SorchInput /> 
+              <Stack direction="row" sx={{ width: "800px" }}>
+                <SorchInput />
               </Stack>
             </Stack>
 
@@ -63,25 +67,20 @@ export const Header = () => {
                 <Typography variant="body2">Избранное</Typography>
               </Stack>
               <Stack alignItems="center">
-                <IconButton onClick={() => setShow(true)}>
-                  <Badge badgeContent={count ? count : 0} color="error">
-                    <KorizkaIcons />
-                  </Badge>
-                </IconButton>
+                <Link to={"/korzina"}>
+                  <IconButton >
+                    <Badge badgeContent={count} color="error">
+                      <KorizkaIcons />
+                    </Badge>
+                  </IconButton>
+                </Link>
                 <Typography variant="body2">Корзина</Typography>
               </Stack>
             </Stack>
           </Stack>
         </Container>
 
-        <Drawer onClose={() => setShow(false)} open={show} anchor="left">
-          <Button
-            onClick={() => setShow(false)}
-            sx={{ marginLeft: "auto", fontSize: "30px", padding: "10px" }}
-          >
-            X
-          </Button>
-        </Drawer>
+      
       </Stack>
     </>
   );

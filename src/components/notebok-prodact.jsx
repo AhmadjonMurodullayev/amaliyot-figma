@@ -4,19 +4,18 @@ import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-import { Button, Stack, Typography, IconButton } from "@mui/material";
+import { Button, Stack, Typography } from "@mui/material";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useDispatch } from "react-redux";
+import { useNotebookGet } from "../hooks/useNotebookGet";
+import { addCart } from "../redux/product-reducer";
 import { KorizkaIcons } from "../assets/icons/korizka-icons";
-import { usePhoneGet } from "../hooks/usePhoneGet";
 import { LeftIcons } from "../assets/icons/left-icons";
 import { RightIcons } from "../assets/icons/right-icons";
-import { useDispatch } from "react-redux";
-import { addCart } from "../redux/product-reducer";
-import { Link } from "react-router-dom";
 
-export const PhoneProdact = (props) => {
-  const { data, isLoading } = usePhoneGet();
+export const NotebokProdact = (props) => {
+  const { data, isLoading } = useNotebookGet();
   const dispatch = useDispatch();
 
   const handleClick = (item) => {
@@ -45,17 +44,15 @@ export const PhoneProdact = (props) => {
   return (
     <>
       <Stack
-        my={4}
+        my={3}
         direction={"row"}
         alignItems={"center"}
         justifyContent={"space-between"}
       >
-        <Stack>
-          <Typography variant="h4" fontFamily={"monospace"}>
-            Смартфоны и планшеты
-          </Typography>
-        </Stack>
-        <Stack my={1} justifyContent={"end"} direction={"row"}>
+        <Typography variant="h4" fontFamily={"monospace"}>
+          Смартфоны и планшеты
+        </Typography>
+        <Stack direction={"row"} gap={2}>
           <button
             style={{ border: "none", backgroundColor: "inherit" }}
             className="arrow-right arrow"
@@ -75,7 +72,6 @@ export const PhoneProdact = (props) => {
         slidesPerView={6}
         spaceBetween={30}
         freeMode
-        pagination={{ clickable: true }}
         navigation={{ nextEl: ".arrow-left", prevEl: ".arrow-right" }}
         modules={[FreeMode, Navigation]}
         className="mySwiper"
@@ -108,13 +104,7 @@ export const PhoneProdact = (props) => {
                     Смартфон {item.barand}
                   </Typography>
                   <Typography variant="body2" color="textSecondary">
-                    <Link
-                      style={{ textDecoration: "none" }}
-                      
-                      to={`/korzina/${item.id}`}
-                    >
-                      {item.titel} {item.rame}
-                    </Link>
+                    {item.titel} {item.rame}
                   </Typography>
                   <Typography variant="body2" color="textSecondary">
                     Цвет: {item.color}

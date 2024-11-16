@@ -8,6 +8,7 @@ const productReducer = createSlice({
   },
   reducers: {
     addCart: (state, action) => {
+      
       const product = state.product_list.find(
         (item) => item.id === action.payload.id
       );
@@ -27,6 +28,7 @@ const productReducer = createSlice({
     },
     toggleAmount: (state, action) => {
       const newProductList = state.product_list.map((item) => {
+        
         if (
           action.payload.type === "increment" &&
           item.id === action.payload.id

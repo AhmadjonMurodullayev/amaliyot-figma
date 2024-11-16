@@ -1,5 +1,6 @@
 import { Stack, Typography } from "@mui/material";
 import React from "react";
+import { Link } from "react-router-dom";
 
 export const Catalog = ({ id, img, text, name }) => {
   return (
@@ -18,9 +19,9 @@ export const Catalog = ({ id, img, text, name }) => {
       <Stack>
         <img src={img} alt={name} style={{ width: "100%", height: "auto" }} />
       </Stack>
-      <Stack ml={2}>
+      <Stack textAlign={"center"}>
         <Typography variant="subtitle1" fontWeight="bold">
-          {text}
+          <Link style={{ textDecoration: "none", color: "black" }}>{text}</Link>
         </Typography>
       </Stack>
     </Stack>
