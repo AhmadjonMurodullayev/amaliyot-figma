@@ -28,7 +28,7 @@ export const AutoTovarProdatc = ({ id, img, title, brand, price }) => {
 
   return (
     <Stack
-      width={"250px"}
+      width={"200px"}
       position="relative"
       spacing={1}
       p={1.5}

@@ -28,7 +28,7 @@ export const PhonePages = ({ id, img, title, rame, color, brand, price }) => {
 
   return (
     <Stack
-      width={"250px"}
+      width={"230px"}
       position="relative"
       spacing={1}
       p={1.5}

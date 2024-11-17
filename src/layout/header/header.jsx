@@ -17,10 +17,11 @@ import SorchInput from "../../components/sorch-input";
 import { KorizkaIcons } from "../../assets/icons/korizka-icons";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { SingIn } from "../../pages/sing-in/sing-in";
 
 export const Header = () => {
   const { count } = useSelector((state) => state.product);
- 
+  const [open, setOpen] = React.useState(false);
 
   return (
     <>
@@ -55,7 +56,7 @@ export const Header = () => {
 
             <Stack direction="row" spacing={4} alignItems="center">
               <Stack alignItems="center">
-                <IconButton>
+                <IconButton onClick={() => setOpen(true)}>
                   <UserIcons />
                 </IconButton>
                 <Typography variant="body2">Войти</Typography>
@@ -68,7 +69,7 @@ export const Header = () => {
               </Stack>
               <Stack alignItems="center">
                 <Link to={"/korzina"}>
-                  <IconButton >
+                  <IconButton>
                     <Badge badgeContent={count} color="error">
                       <KorizkaIcons />
                     </Badge>
@@ -79,8 +80,17 @@ export const Header = () => {
             </Stack>
           </Stack>
         </Container>
-
-      
+        <Drawer sx={{ width: "500px" }} anchor="right" open={open} onClose={() => setOpen(false)}>
+          <Button
+            onClick={() => setOpen(false)}
+            sx={{ marginLeft: "auto", fontSize: "30px" }}
+          >
+            X
+          </Button>
+          <Stack sx={{ padding: "0 25px" }}>
+          <SingIn />
+          </Stack>
+        </Drawer>
       </Stack>
     </>
   );

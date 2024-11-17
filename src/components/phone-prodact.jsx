@@ -104,21 +104,15 @@ export const PhoneProdact = (props) => {
                   }}
                 />
                 <Stack spacing={0.5}>
-                  <Typography fontWeight="bold">
-                    Смартфон {item.barand}
-                  </Typography>
-                  <Typography variant="body2" color="textSecondary">
-                    <Link
-                      style={{ textDecoration: "none" }}
-                      
-                      to={`/korzina/${item.id}`}
-                    >
-                      {item.titel} {item.rame}
-                    </Link>
-                  </Typography>
-                  <Typography variant="body2" color="textSecondary">
-                    Цвет: {item.color}
-                  </Typography>
+                  <Link
+                    style={{ textDecoration: "none", color: "black" }}
+                    to={`/korzina/${item.id}`}
+                  >
+                    <Typography variant="p" fontFamily={"Jost"}>
+                      Смартфон {item.brand} {item.titel} {item.rame}
+                      {item.color}
+                    </Typography>
+                  </Link>
                 </Stack>
                 <Stack direction="row" alignItems="center" spacing={1} mt={1}>
                   <Typography fontWeight="bold">{item.price} Сум</Typography>
