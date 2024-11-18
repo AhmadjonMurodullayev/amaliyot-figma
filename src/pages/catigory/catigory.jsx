@@ -1,27 +1,29 @@
-import React from "react";
-import { usePhoneGet } from "../../hooks/usePhoneGet";
+import React from 'react'
+import { useParams } from 'react-router-dom'
+import { useCatalog } from '../../hooks/useCatalog'
 import {
-  Container,
-  Stack,
-  Typography,
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
-  FormGroup,
-  FormControlLabel,
-  Checkbox,
-  TextField,
-  FormControl,
-} from "@mui/material";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { PhonePages } from "../../components/phone-pages";
+    Container,
+    Stack,
+    Typography,
+    Accordion,
+    AccordionSummary,
+    AccordionDetails,
+    FormGroup,
+    FormControlLabel,
+    Checkbox,
+    TextField,
+    FormControl,
+  } from "@mui/material";
+  import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { CatigoryPages } from '../../components/catigory-pages';
 
-export const Phone = () => {
-  const { data } = usePhoneGet(); 
-
+export const Catigory = () => {
+    const {name} = useParams()
+    const {data} = useCatalog(name)
   return (
     <>
-      <Container maxWidth="xl" sx={{ mt: 4 }}>
+    
+    <Container maxWidth="xl" sx={{ mt: 4 }}>
         <Stack direction="row" spacing={1}>
           <Typography variant="h5" color="#7e7e7e">
             Главная /
@@ -42,7 +44,7 @@ export const Phone = () => {
           >
             {data?.map((item, index) => (
               <Stack key={index} >
-                <PhonePages {...item} />
+                <CatigoryPages {...item} />
               </Stack>
             ))}
           </Stack>
@@ -262,7 +264,6 @@ export const Phone = () => {
             </Accordion>
           </Stack>
         </Stack>
-      </Container>
-    </>
-  );
-};
+      </Container></>
+  )
+}

@@ -17,11 +17,13 @@ import SorchInput from "../../components/sorch-input";
 import { KorizkaIcons } from "../../assets/icons/korizka-icons";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { SingUp } from "../../pages/sing-up/sing-up";
 import { SingIn } from "../../pages/sing-in/sing-in";
 
 export const Header = () => {
   const { count } = useSelector((state) => state.product);
   const [open, setOpen] = React.useState(false);
+  const [view, setView] = React.useState("signIn");
 
   return (
     <>
@@ -80,7 +82,13 @@ export const Header = () => {
             </Stack>
           </Stack>
         </Container>
-        <Drawer sx={{ width: "500px" }} anchor="right" open={open} onClose={() => setOpen(false)}>
+
+        <Drawer
+          sx={{ width: "500px" }}
+          anchor="right"
+          open={open}
+          onClose={() => setOpen(false)}
+        >
           <Button
             onClick={() => setOpen(false)}
             sx={{ marginLeft: "auto", fontSize: "30px" }}
@@ -88,8 +96,32 @@ export const Header = () => {
             X
           </Button>
           <Stack sx={{ padding: "0 25px" }}>
-          <SingIn />
+            {view === "signIn" ? <SingIn /> : <SingUp />}
           </Stack>
+          <Container>
+            {view === "signIn" ? (
+              <Button
+              
+                color="black"
+                sx={{ padding: "12px 0" ,marginTop:"20px"}}
+                variant="outlined"
+                fullWidth
+                onClick={() => setView("signUp")}
+              >
+                Зарегистрироваться
+              </Button>
+            ) : (
+              <Button
+                color="black"
+                sx={{ padding: "12px 0",marginTop:"20px" }}
+                variant="outlined"
+                fullWidth
+                onClick={() => setView("signIn")}
+              >
+                Back to Sign In
+              </Button>
+            )}
+          </Container>
         </Drawer>
       </Stack>
     </>

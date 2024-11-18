@@ -1,13 +1,25 @@
 import { Button, Stack, TextField, Typography } from "@mui/material";
 import React from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { useRegister } from "../../service/useRegister";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 export const SingUp = () => {
   const { handleSubmit, register, reset } = useForm();
+  const naviget = useNavigate()
+  const { mutate } = useRegister();
 
   const submit = (data) => {
-    console.log(data);
+    mutate(data, {
+      onSuccess: (data) => {
+        toast.success(data.message);
+        naviget("/profil");
+      },
+      onError: (data) => {
+        toast.error(data.response.data.message);
+      },
+    });
   };
   return (
     <>
@@ -21,8 +33,10 @@ export const SingUp = () => {
               Номер телефона
             </Typography>
             <TextField
-              type="number"
-              {...register("phone")}
+            // value={"+998"}
+            defaultValue={"+998"}
+              type="tel"
+              {...register("tel")}
               variant="outlined"
               fullWidth
               placeholder="Введите номер телефона"
@@ -70,7 +84,6 @@ export const SingUp = () => {
             >
               Войти
             </Button>
-           
           </Stack>
         </form>
       </Stack>

@@ -21,7 +21,9 @@ export const Catalog = ({ id, img, text, name }) => {
       </Stack>
       <Stack textAlign={"center"}>
         <Typography variant="subtitle1" fontWeight="bold">
-          <Link style={{ textDecoration: "none", color: "black" }}>{text}</Link>
+          <Link to={`/catigory/${name}`} style={{ textDecoration: "none", color: "black" }}>
+          {text}
+          </Link>
         </Typography>
       </Stack>
     </Stack>

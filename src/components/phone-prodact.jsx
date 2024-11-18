@@ -64,7 +64,7 @@ export const PhoneProdact = (props) => {
           </button>
           <button
             style={{ border: "none", backgroundColor: "inherit" }}
-            className="arrow-left arrow"
+            className="arrow-lefts arrow"
           >
             <RightIcons />
           </button>
@@ -76,7 +76,7 @@ export const PhoneProdact = (props) => {
         spaceBetween={30}
         freeMode
         pagination={{ clickable: true }}
-        navigation={{ nextEl: ".arrow-left", prevEl: ".arrow-right" }}
+        navigation={{ nextEl: ".arrow-lefts", prevEl: ".arrow-right" }}
         modules={[FreeMode, Navigation]}
         className="mySwiper"
       >

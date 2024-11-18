@@ -1,4 +1,4 @@
-import { Button, IconButton, Stack, Typography, Tooltip } from "@mui/material";
+import { Button, IconButton, Stack, Typography } from "@mui/material";
 import React from "react";
 import { LikeIcons } from "../assets/icons/like-icons";
 import { KorizkaIcons } from "../assets/icons/korizka-icons";
@@ -6,24 +6,20 @@ import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { addCart } from "../redux/product-reducer";
 
-export const TexnicaPages = ({ id, img, title, brand, price }) => {
+export const CatigoryPages = ({ id, img, title, rame, color, brand, price }) => {
   const dispatch = useDispatch();
 
   const handleClick = () => {
     try {
       const parsedPrice = Number(price.replace(/\s/g, ""));
-      const product = {
-        id,
-        img,
-        title,
-        brand,
-        price: parsedPrice,
-      };
+      const product = { id, img, title, rame, color, brand, price: parsedPrice };
 
       dispatch(addCart(product));
-      toast.success("Товар успешно добавлен!", { position: "top-center" });
+
+      toast.success("Товар успешно добавлен!", {
+        position: "top-center",
+      });
     } catch (error) {
-      console.error("Add to cart error:", error);
       toast.error("Ошибка при добавлении товара в корзину.", {
         position: "top-right",
       });
@@ -32,7 +28,7 @@ export const TexnicaPages = ({ id, img, title, brand, price }) => {
 
   return (
     <Stack
-      width={{ xs: "100%", sm: "250px" }}
+      width={"230px"}
       position="relative"
       spacing={1}
       p={1.5}
@@ -49,9 +45,10 @@ export const TexnicaPages = ({ id, img, title, brand, price }) => {
     >
       <Stack
         direction="row"
-        justifyContent="center"
-        alignItems="center"
         sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
           overflow: "hidden",
           borderRadius: "8px",
           backgroundColor: "#fff",
@@ -86,11 +83,9 @@ export const TexnicaPages = ({ id, img, title, brand, price }) => {
           },
         }}
       >
-        <Tooltip title="Добавить в избранное">
-          <IconButton>
-            <LikeIcons />
-          </IconButton>
-        </Tooltip>
+        <IconButton>
+          <LikeIcons />
+        </IconButton>
       </Stack>
 
       <Stack>
@@ -103,7 +98,7 @@ export const TexnicaPages = ({ id, img, title, brand, price }) => {
             lineHeight: "1.4",
           }}
         >
-          {title} {brand}
+          {title} {rame} {color} {brand}
         </Typography>
       </Stack>
 

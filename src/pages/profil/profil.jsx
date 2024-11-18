@@ -1,7 +1,15 @@
 import { Container, Stack, Typography } from "@mui/material";
 import React from "react";
+import { loadState } from "../../config/store";
+import { Navigate } from "react-router-dom";
 
 export const Profil = () => {
+  const user = loadState('userData');
+
+  if(!user){
+    return <Navigate replace to={'/'} />
+  }
+
   return (
     <>
       <Container maxWidth="xl">

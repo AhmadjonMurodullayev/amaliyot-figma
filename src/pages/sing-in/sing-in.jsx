@@ -1,17 +1,23 @@
 import { Button, Stack, TextField, Typography } from "@mui/material";
 import React from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useLogin } from "../../service/useLogin";
+import { toast } from "react-toastify";
 
 export const SingIn = () => {
   const { handleSubmit, register, reset } = useForm();
+  const naviget = useNavigate()
   const{mutate}=useLogin()
 
   const submit = (data) => {
     mutate(data,{
       onSuccess:(data)=>{
-        
+        toast.success(data.message);
+        naviget("/profil")
+      },
+      onError:(data)=>{
+        toast.error(data.response.data.message);
       }
     })
   };
@@ -27,8 +33,8 @@ export const SingIn = () => {
               Номер телефона
             </Typography>
             <TextField
-              type="number"
-              {...register("phone")}
+              type="email"
+              {...register("email")}
               variant="outlined"
               fullWidth
               placeholder="Введите номер телефона"
@@ -64,16 +70,7 @@ export const SingIn = () => {
             >
               Войти
             </Button>
-            <Link to="/sing-up" style={{ textDecoration: "none" }}>
-              <Button
-                color="black"
-                sx={{ padding: "12px 0" }}
-                variant="outlined"
-                fullWidth
-              >
-                Зарегистрироваться
-              </Button>
-            </Link>
+             
           </Stack>
         </form>
       </Stack>
