@@ -16,15 +16,30 @@ import { UserIcons } from "../../assets/icons/user-icons";
 import SorchInput from "../../components/sorch-input";
 import { KorizkaIcons } from "../../assets/icons/korizka-icons";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { SingUp } from "../../pages/sing-up/sing-up";
 import { SingIn } from "../../pages/sing-in/sing-in";
+import { loadState } from "../../config/store";
 
 export const Header = () => {
   const { count } = useSelector((state) => state.product);
   const [open, setOpen] = React.useState(false);
   const [view, setView] = React.useState("signIn");
+  const navigate = useNavigate()
+  const location = useLocation();
 
+  React.useEffect(() => {
+    setOpen(false);
+  }, [location.pathname]);
+
+  const handleUserIconClick = () => {
+    const token = loadState("userData")
+    if (token) {
+      navigate("/profil"); 
+    } else {
+      setOpen(true); 
+    }
+  };
   return (
     <>
       <Navbar />
@@ -58,7 +73,7 @@ export const Header = () => {
 
             <Stack direction="row" spacing={4} alignItems="center">
               <Stack alignItems="center">
-                <IconButton onClick={() => setOpen(true)}>
+                <IconButton onClick={ handleUserIconClick}>
                   <UserIcons />
                 </IconButton>
                 <Typography variant="body2">Войти</Typography>
@@ -101,9 +116,8 @@ export const Header = () => {
           <Container>
             {view === "signIn" ? (
               <Button
-              
                 color="black"
-                sx={{ padding: "12px 0" ,marginTop:"20px"}}
+                sx={{ padding: "12px 0", marginTop: "20px" }}
                 variant="outlined"
                 fullWidth
                 onClick={() => setView("signUp")}
@@ -113,7 +127,7 @@ export const Header = () => {
             ) : (
               <Button
                 color="black"
-                sx={{ padding: "12px 0",marginTop:"20px" }}
+                sx={{ padding: "12px 0", marginTop: "20px" }}
                 variant="outlined"
                 fullWidth
                 onClick={() => setView("signIn")}

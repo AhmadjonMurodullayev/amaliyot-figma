@@ -1,10 +1,11 @@
+import React, { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-import { Button, Stack, Typography, IconButton } from "@mui/material";
+import { Button, Stack, Typography } from "@mui/material";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { KorizkaIcons } from "../assets/icons/korizka-icons";
@@ -13,11 +14,14 @@ import { LeftIcons } from "../assets/icons/left-icons";
 import { RightIcons } from "../assets/icons/right-icons";
 import { useDispatch } from "react-redux";
 import { addCart } from "../redux/product-reducer";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { EysIcons } from "../assets/icons/eys-icons";
 
-export const PhoneProdact = (props) => {
+export const PhoneProdact = () => {
   const { data, isLoading } = usePhoneGet();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [cartItems, setCartItems] = useState([]);
 
   const handleClick = (item) => {
     try {
@@ -32,6 +36,7 @@ export const PhoneProdact = (props) => {
 
       dispatch(addCart({ ...item, price: parsedPrice }));
 
+      setCartItems((prev) => [...prev, item.id]);
       toast.success("Mufaqqatliy qo'shildi", {
         position: "top-center",
       });
@@ -40,6 +45,10 @@ export const PhoneProdact = (props) => {
         position: "top-right",
       });
     }
+  };
+
+  const handleNavigateToCart = () => {
+    navigate("/korzina");
   };
 
   return (
@@ -116,18 +125,33 @@ export const PhoneProdact = (props) => {
                 </Stack>
                 <Stack direction="row" alignItems="center" spacing={1} mt={1}>
                   <Typography fontWeight="bold">{item.price} Сум</Typography>
-                  <Button
-                    onClick={() => handleClick(item)}
-                    variant="outlined"
-                    sx={{
-                      backgroundColor: "rgba(254, 238, 0, 1)",
-                      minWidth: "40px",
-                      minHeight: "40px",
-                      padding: 1,
-                    }}
-                  >
-                    <KorizkaIcons />
-                  </Button>
+                  {cartItems.includes(item.id) ? (
+                    <Button
+                      onClick={handleNavigateToCart}
+                      variant="outlined"
+                      sx={{
+                        backgroundColor: "rgba(254, 238, 0, 1)",
+                        minWidth: "40px",
+                        minHeight: "40px",
+                        padding: 1,
+                      }}
+                    >
+                      <EysIcons />
+                    </Button>
+                  ) : (
+                    <Button
+                      onClick={() => handleClick(item)}
+                      variant="outlined"
+                      sx={{
+                        backgroundColor: "rgba(254, 238, 0, 1)",
+                        minWidth: "40px",
+                        minHeight: "40px",
+                        padding: 1,
+                      }}
+                    >
+                      <KorizkaIcons />
+                    </Button>
+                  )}
                 </Stack>
               </Stack>
             </SwiperSlide>

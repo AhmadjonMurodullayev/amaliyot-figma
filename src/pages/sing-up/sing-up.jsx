@@ -7,13 +7,14 @@ import { useNavigate } from "react-router-dom";
 
 export const SingUp = () => {
   const { handleSubmit, register, reset } = useForm();
-  const naviget = useNavigate()
+  const naviget = useNavigate();
   const { mutate } = useRegister();
 
   const submit = (data) => {
     mutate(data, {
       onSuccess: (data) => {
         toast.success(data.message);
+        reset();
         naviget("/profil");
       },
       onError: (data) => {
@@ -33,8 +34,8 @@ export const SingUp = () => {
               Номер телефона
             </Typography>
             <TextField
-            // value={"+998"}
-            defaultValue={"+998"}
+              // value={"+998"}
+              defaultValue={"+998"}
               type="tel"
               {...register("tel")}
               variant="outlined"

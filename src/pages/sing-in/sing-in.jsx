@@ -14,6 +14,7 @@ export const SingIn = () => {
     mutate(data,{
       onSuccess:(data)=>{
         toast.success(data.message);
+        reset();
         naviget("/profil")
       },
       onError:(data)=>{
